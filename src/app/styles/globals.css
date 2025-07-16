@@ -346,7 +346,7 @@
 }
 
 @utility u21 {
-  @apply text-2xl font-bold mb-8;
+  @apply text-2xl font-bold mb-5;
 }
 
 @utility u22 {
@@ -381,6 +381,7 @@
   --media-range-thumb-width: 1rem;
   --media-range-thumb-height: 1rem;
   background: var(--transparent-color);
+  --media-range-track-background: var(--color-g-100);
   --media-range-bar-color: var(--color-third);
   --media-range-thumb-color: var(--color-third);
   --media-range-thumb-background: var(--color-third);

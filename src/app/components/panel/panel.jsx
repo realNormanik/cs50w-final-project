@@ -18,7 +18,7 @@ export default function ClientPanel({ title }) {
   // Access user information from the authentication context
   const { user } = useAuth();
   // Functions to update the current book in the audio context
-  const { setBookFile, setBookPicture, setBookTitle, setBookId, setBookAuthor, setBookDescription, bookId } = useAudio();
+  const { setBookFile, setBookPicture, setBookTitle, setBookId, bookId } = useAudio();
 
   // States to store the books, filtered books, loading status, and search query
   const [books, setBooks] = useState([]);
@@ -136,8 +136,6 @@ export default function ClientPanel({ title }) {
                     setBookId(book.id);
                     setBookTitle(book.title);
                     setBookPicture(book.picture);
-                    setBookAuthor(book.author);
-                    setBookDescription(book.description);
                   }
                 }}>
                   <td>

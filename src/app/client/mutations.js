@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const LOGIN_MUTATION = gql`
-  mutation Mutation($credentials: LoginCredentials!) {
+  mutation LoginUser($credentials: LoginCredentials!) {
     loginUser(credentials: $credentials) {
       data
     }
@@ -9,7 +9,7 @@ export const LOGIN_MUTATION = gql`
 `;
 
 export const REGISTER_MUTATION = gql`
-  mutation Mutation($credentials: RegisterInput!) {
+  mutation RegisterUser($credentials: RegisterInput!) {
     registerUser(credentials: $credentials) {
       data
     }
@@ -17,7 +17,7 @@ export const REGISTER_MUTATION = gql`
 `;
 
 export const UPDATE_MUTATION = gql`
-  mutation Mutation($credentials: UpdateUserInput!) {
+  mutation UpdateUser($credentials: UpdateUserInput!) {
     updateUser(credentials: $credentials) {
       data
     }
@@ -25,7 +25,7 @@ export const UPDATE_MUTATION = gql`
 `;
 
 export const LIKE_MUTATION = gql`
-  mutation Mutation($bookId: ID!, $userId: ID!) {
+  mutation LikeMutation($bookId: ID!, $userId: ID!) {
     addLike(bookId: $bookId, userId: $userId) {
       data
     }
@@ -33,7 +33,7 @@ export const LIKE_MUTATION = gql`
 `;
 
 export const UNLIKE_MUTATION = gql`
-  mutation Mutation($bookId: ID!, $userId: ID!) {
+  mutation UnlikeMutation($bookId: ID!, $userId: ID!) {
     removeLike(bookId: $bookId, userId: $userId) {
       data
     }

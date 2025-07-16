@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import Script from "next/script";
 import { useState, useEffect } from "react";
 
@@ -55,7 +56,12 @@ export default function AudioPlayer({ title }) {
       <div className="u1 w-full p-5 md:p-8 gap-4 flex-col top-0 left-0 right-0 bottom-0 border-2 border-primary rounded-sm">
         <h2 className="u21">Book player</h2>
 
-        <Placeholder />
+        {/* Warunkowe renderowanie: Placeholder lub Obraz */}
+        {!isClient || !currentAudio ? (
+          <Placeholder />
+        ) : (
+          <Image src={bookPicture} alt="Book cover" width={175} height={200} className="rounded-sm object-cover" />
+        )}
 
         {/* Display the book title with a link if it"s the client side */}
         {isClient && (

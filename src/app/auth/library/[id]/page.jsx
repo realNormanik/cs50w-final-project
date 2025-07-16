@@ -7,29 +7,28 @@ import BookPanel from "components/panel/book-panel";
 
 export default async function Page({ params }) {
   const { id } = await params;
+  const client = apolloClient(process.env.BOOK_AUTH);
 
-  try {
-    const client = apolloClient(process.env.NEXT_PUBLIC_BOOK_AUTH);
+  const { data, error } = await client.query({
+    query: BOOK_QUERY,
+    variables: { id }
+  });
 
-    const data = await client.query({
-      query: BOOK_QUERY,
-      variables: { id }
-    });
-
-    const book = data?.books;
-
-    if (!book || !id) {
-      notFound();
-    };
-
-    return (
-      <div className="u22">
-        <BookPanel />
-        <AudioPlayer />
-      </div>
-    );
-  } catch (error) {
+  if (error) {
     console.error("Error:", error);
     notFound();
   };
+
+  const book = data?.books[0];
+
+  if (!book || !id) {
+    notFound();
+  };
+
+  return (
+    <div className="u22">
+      <BookPanel book={book} />
+      <AudioPlayer />
+    </div>
+  );
 };

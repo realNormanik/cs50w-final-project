@@ -5,15 +5,11 @@ const AudioContext = createContext({
   bookId: null,
   bookFile: null,
   bookTitle: null,
-  bookAuthor: null,
   bookPicture: null,
-  bookDescription: null,
   setBookId: () => {},
   setBookFile: () => {},
   setBookTitle: () => {},
-  setBookAuthor: () => {},
-  setBookPicture: () => {},
-  setBookDescription: () => {}
+  setBookPicture: () => {}
 });
 
 const useLocalStorageState = (key, initialValue) => {
@@ -45,9 +41,7 @@ export function AudioProvider({ children }) {
   const [bookId, setBookId] = useLocalStorageState("book-id", null);
   const [bookFile, setBookFile] = useLocalStorageState("book-file", null);
   const [bookTitle, setBookTitle] = useLocalStorageState("book-title", null);
-  const [bookAuthor, setBookAuthor] = useLocalStorageState("book-author", null);
   const [bookPicture, setBookPicture] = useLocalStorageState("book-picture", null);
-  const [bookDescription, setBookDescription] = useLocalStorageState("book-description", null);
 
   return (
     <AudioContext.Provider
@@ -58,12 +52,8 @@ export function AudioProvider({ children }) {
         setBookFile,
         bookTitle,
         setBookTitle,
-        bookAuthor,
-        setBookAuthor,
         bookPicture,
         setBookPicture,
-        bookDescription,
-        setBookDescription
       }}
     >
       {children} {/* Render the children components with access to audio state */}

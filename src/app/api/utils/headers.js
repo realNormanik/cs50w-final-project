@@ -57,7 +57,7 @@ export async function authenticateHeader(authHeader) {
     throw new GraphQLError("Invalid authorization header format", { extensions: { code: "UNAUTHENTICATED" } });
   };
 
-  if (token === env.NEXT_BOOK_AUTH) {
+  if (token === env.BOOK_AUTH) {
     return null;
   };
 
