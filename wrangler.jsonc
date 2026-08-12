@@ -1,50 +1,38 @@
 {
-   	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "echoverse",
-    "main": ".open-next/worker.js",
-	"compatibility_date": "2025-03-01",
-	"compatibility_flags": [
-	    "nodejs_compat",
-		"global_fetch_strictly_public"
-	],
-    "dev": {
-    	"ip": "127.0.0.1",
-    	"port": 3000,
-        "local_protocol": "http"
-    },
-  	"placement": {
-	    "mode": "smart"
-  	},
-    "assets": {
-		"binding": "ASSETS",
-		"directory": ".open-next/assets"
-    },
-    "observability": {
-    	"enabled": true
-	},
-    "d1_databases": [
-        {
-            "binding": "D1",
-            "database_name": "cs50",
-            "database_id": "e7af7a4f-4f32-4aaa-9fe3-33db3653c0b7"
-        }
-    ],
-    "r2_buckets": [
-        {
-            "binding": "R2",
-            "bucket_name": "cs50"
-        }
-    ],
-    "vars": {
-        "SITE_KEY": "0x4AAAAAAA8CytbRsD_4tmim",
-        "BOOK_AUTH": "7y68NwcH6STwp6YDTUKbU6ZUZs6B5FPe",
-        "NEXT_PUBLIC_SITE_KEY": "0x4AAAAAAA8CytbRsD_4tmim",
-        "JWT_SECRET": "epalxiPPOzirDSTzlxn2MA3NoOyhGgN0",
-        "NEXT_PUBLIC_JWT_SECRET": "epalxiPPOzirDSTzlxn2MA3NoOyhGgN0",
-        "SECRET_KEY": "0x4AAAAAAA8Cypo9aDiDt4r2F23lLNjpoZs",
-        "CRYPTO_KEY": "gEvMYq9ucDTpJBZxjDycysJTXMoGcNrn",
-        "CAMB_AI_KEY": "84522279-8455-4a0e-ab09-87a97d570b8f",
-	    "NODE_VERSION": "24.1.0",
-        "PNPM_VERSION": "10.12.4"
-	}
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "leadflow",
+  "main": "src/index.py",
+  "compatibility_flags": [
+    "python_workers"
+  ],
+  "compatibility_date": "2026-08-12",
+  "assets": {
+    "directory": "./staticfiles",
+    "binding": "ASSETS"
+  },
+  "build": {
+    "command": "WORKERS_CI=1 python src/manage.py collectstatic --noinput"
+  },
+  "python_modules": {
+    "exclude": [
+      "**/*.pyc",
+      "**/__pycache__",
+      "**/*.po",
+      "**/*.css",
+      "**/*.js",
+      "**/*.svg",
+      "**/*.png",
+      "**/*.jpg"
+    ]
+  },
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "cs50",
+      "database_id": "e7af7a4f-4f32-4aaa-9fe3-33db3653c0b7"
+    }
+  ]
 }

@@ -1,40 +1,16 @@
 {
-    "name": "echoverse",
-    "version": "0.1.0",
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "dev": "next dev --turbopack",
-        "build": "next build",
-        "lint": "next lint --fix",
-        "prod": "opennextjs-cloudflare build",
-        "deploy": "opennextjs-cloudflare deploy",
-        "preview": "opennextjs-cloudflare preview",
-        "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts",
-        "db": "wrangler d1 execute cs50 --file=./database/schema.sql"
-    },
-    "dependencies": {
-        "@apollo/client": "^3.13.8",
-        "@apollo/server": "^4.12.2",
-        "@as-integrations/cloudflare-workers": "^1.1.1",
-        "@graphql-tools/schema": "^10.0.23",
-        "@opennextjs/cloudflare": "^1.5.1",
-        "cssnano": "^7.1.0",
-        "graphql": "^16.11.0",
-        "jose": "^6.0.12",
-        "next": "15.3.3",
-        "react": "^19.1.0",
-        "react-dom": "^19.1.0",
-        "react-lottie": "^1.2.10",
-        "uuid": "^11.1.0"
-    },
-    "devDependencies": {
-        "@eslint/eslintrc": "^3.3.1",
-        "@tailwindcss/postcss": "^4.1.11",
-        "eslint": "^9.31.0",
-        "eslint-config-next": "15.3.3",
-        "tailwindcss": "^4.1.11",
-        "wrangler": "^4.24.4"
-    },
-    "packageManager": "pnpm@10.12.4+sha512.5ea8b0deed94ed68691c9bad4c955492705c5eeb8a87ef86bc62c74a26b037b08ff9570f108b2e4dbd1dd1a9186fea925e527f141c648e85af45631074680184"
+  "name": "leadflow",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dependencies": "uv pip install --system workers-py --upgrade && uv run pywrangler sync",
+    "deploy": "pnpm dependencies && uv run pywrangler deploy",
+    "dev": "uv run pywrangler dev",
+    "start": "uv run pywrangler dev",
+    "db": "wrangler d1 execute cs50 --file=./database/schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.120.1"
+  },
+  "packageManager": "pnpm@11.21.0"
 }

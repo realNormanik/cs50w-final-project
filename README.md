@@ -1,338 +1,177 @@
-# CS50 Project 5 - Final Project
+# CS50 Web Programming with Python and JavaScript - Capstone
 
-My Project stands out from other apps in the CS50 course due to its unique combination of audiobook features, interactivity and the use of artificial intelligence. The app not only allows users to listen to audiobooks, but also gives them the ability to create their own recordings and generate audiobooks using Google Text-to-Speech technology. This combination of a traditional approach to audiobooks with modern AI solutions makes the project innovative and tailored to the needs of modern users.
+## LeadFlow
 
-While building the application, I encountered many challenges that required creative thinking and advanced technical knowledge. For example, integrating with Google's Text-to-Speech API required understanding how to effectively manage audio data and how to ensure a smooth user experience when generating audiobooks. Additionally, optimizing the application for performance on the Cloudflare platform was crucial to ensure fast loading and responsiveness, which is important for multimedia applications.
-
-Using Next.js as a framework to build the web application allowed me to use advanced features such as server-side rendering and automatic code splitting, which significantly improved performance. Using Cloudflare D1 for database management and Cloudflare R2 for audio file storage gave me flexibility and scalability, which is essential for the growing number of users and audiobooks.
-
-All of these elements make my project not only meet the course requirements, but also provide a comprehensive audiobook solution that combines modern technology with a user-friendly interface. I'm proud to have created an application that not only works, but also provides value to users, enabling them to discover and create audio content in a way that is both innovative and accessible.
+LeadFlow is a CRM (Customer Relationship Management) web application built with Django, JavaScript, HTML, and CSS. It was developed as the final Capstone project for CS50's Web Programming with Python and JavaScript course. The application allows a user to manage clients and the sales process through an interactive, Kanban-style pipeline in which deals are represented as draggable cards.
 
 ## 🗂️ Project Structure
 
-The project structure is based on Next.js application with Cloudflare integration:
+The Django project contains the following key elements:
 
 ```
-  cs50w-final-project/
-  ├── .eslintrc.json
-  ├── .gitignore
-  ├── jsconfig.json
-  ├── LICENSE
-  ├── next.config.mjs
-  ├── open-next.config.ts
-  ├── package.json
-  ├── pnpm-lock.yaml
-  ├── postcss.config.mjs
-  ├── wrangler.jsonc                    # A file containing settings for the Cloudflare Workers service such as environment variables.
-  ├── .vscode/
-  │   └── settings.json
-  ├── database/
-  │   └── schema.sql
-  ├── public/                           # Public files
-  │   ├── _headers
-  │   ├── _redirects
-  │   ├── 6ffdb3d0-57fe-4008-9bbf-9798d2af71c6.webp
-  │   ├── 9c952f2e-dc15-4db0-b9c0-0782817b8f58.webp
-  │   ├── 66d472c0-880d-4b93-bc8a-ada91cbf997a.json
-  │   ├── 98d3f022-988e-48d4-9c9e-1c64df2bbdc6.webp
-  │   ├── 204c081a-5684-4858-a89b-876b4187f66b.json
-  │   ├── 2780a0a3-11b3-4bb3-bef4-7ef75f7de7c5.webp
-  │   ├── bc85dd48-c477-44f3-a7cb-57ee63b86e07.json
-  │   ├── ce2f1653-5b32-4d3a-8f70-5d3f1a6f843d.webp
-  │   ├── d74a758e-5c65-4b77-af84-3f1e27f939a9.webp
-  │   ├── de34672e-4cf1-4ac2-bb1b-d9caae7d140a.json
-  │   ├── f2ac1f7e-3fa0-4cb8-b2ab-b7e63a2a74c2.webp
-  │   └── logo.svg
-  └── src/                              # Source files
-      ├── lib/                          # Folder with files that add additional features to the application
-      │   └── env.js                    # Script to load all environment variables in the application frontend
-      └── app/                          # Main application folder
-          ├── favicon.ico               # Favicon icon
-          ├── layout.js                 # Layout file
-          ├── not-found.js              # Not found page
-          ├── page.js                   # Main page
-          ├── utils.js                  # Utils frontend file
-          ├── api/                      # A folder to create a backend for the application.
-          │   ├── h57oBNgFRK/
-          │   │   └── route.js
-          │   └── utils/
-          │       ├── headers.js
-          │       ├── resolvers.js
-          │       ├── schema.js
-          │       └── utils.js
-          ├── auth/
-          │   ├── create-book/
-          │   │   └── page.jsx
-          │   ├── library/
-          │   │   ├── [id]/
-          │   │   │   └── page.jsx
-          │   │   └── page.jsx
-          │   ├── login/
-          │   │   └── page.jsx
-          │   ├── my-account/
-          │   │   └── page.jsx
-          │   └── register/
-          │       └── page.jsx
-          ├── client/
-          │   ├── client.js
-          │   ├── mutation.js
-          │   └── query.js
-          ├── components/
-          │   ├── banner.jsx
-          │   ├── footer.jsx
-          │   ├── header.jsx
-          │   ├── loader.jsx
-          │   ├── nav-menu.jsx
-          │   ├── placeholder.jsx
-          │   ├── player.jsx
-          │   ├── buttons/
-          │   │   ├── ai-button.jsx
-          │   │   ├── info-button.jsx
-          │   │   └── like-button.jsx
-          │   ├── forms/
-          │   │   ├── create-book.jsx
-          │   │   ├── edit-account.jsx
-          │   │   ├── search.jsx
-          │   │   ├── sign-in.jsx
-          │   │   └── sign-up.jsx
-          │   └── panel/
-          │       ├── book-panel.jsx
-          │       └── panel.jsx
-          ├── context/
-          │   ├── audio-context.jsx
-          │   ├── auth-context.jsx
-          │   └── theme-context.jsx
-          └── styles/
-              ├── fonts/
-              │   ├── montserrat.woff
-              │   └── proxima-nova.woff
-              ├── icons/
-              │   ├── ai.js
-              │   ├── github.js
-              │   └── logo.js
-              └── globals.css
+capstone/
+├── crm/                          # Main Django application (CRM logic)
+│   ├── migrations/
+│   │   ├── __init__.py
+│   │   └── 0001_initial.py
+│   ├── static/
+│   │   └── crm/
+│   │       ├── dashboard.js
+│   │       ├── favicon.ico
+│   │       ├── filters.js
+│   │       ├── logo.svg
+│   │       ├── modal.js
+│   │       ├── pipeline.js
+│   │       └── styles.css
+│   ├── templates/
+│   │   └── crm/
+│   │       ├── client_detail.html
+│   │       ├── client_form.html
+│   │       ├── client_list.html
+│   │       ├── dashboard.html
+│   │       ├── layout.html
+│   │       ├── login.html
+│   │       ├── pipeline.html
+│   │       ├── register.html
+│   │       ├── stage_settings.html
+│   │       └── task_list.html
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── models.py
+│   ├── urls.py
+│   └── views.py
+├── crm_project/                   # Main project configuration
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── .gitignore
+├── manage.py
+├── README.md
+└── requirements.txt
 ```
+
+## Distinctiveness and Complexity
+
+LeadFlow is a CRM system designed to manage customer relationships and the sales process. I believe this project fully satisfies the distinctiveness and complexity requirements of the course for several independent reasons.
+
+First, LeadFlow is neither a social network nor an e-commerce site, so there is no risk of it being mistaken for Project 4 (Network) or Project 2 (Commerce). The application contains none of the elements typical of a social network, such as public profiles, posts, following other users, or likes. It also has no shopping cart, bidding mechanism, or any transactional features typical of e-commerce platforms. The entire logic of the application is built around business relationships between a single user (a salesperson) and that user's own clients and sales tasks — every logged-in user sees and manages only their own data, which is a fundamentally different data model from both a social network and an online marketplace.
+
+Second, the complexity of the project stems from a multi-layered data structure and the number of models that work together. The application is built on six interrelated models: `Client`, `Deal`, `PipelineStage`, `Activity`, `Task`, and `Tag`. These models form a network of one-to-many and many-to-many relationships (for example, `Deal` has a `ForeignKey` to both `Client` and `PipelineStage`, a `ManyToMany` relationship to `Tag`, and is additionally linked to interaction history through `Activity` and to reminders through `Task`). Such a structure required careful query design (using `prefetch_related`, `annotate`, and `aggregate`) in order to avoid redundant database queries and to keep the pipeline view and the statistics dashboard performant.
+
+Third, a key element of front-end complexity is a self-implemented **drag-and-drop mechanism** built on the native HTML5 Drag and Drop API, without relying on any third-party library. Dragging a card representing a deal from one pipeline column to another updates its stage and position in real time through an asynchronous `fetch()` request sent to a dedicated API endpoint (`/api/deals/<id>/move`), without reloading the page. This required writing logic to calculate a card's position relative to other elements within a column (the `getDragAfterElement` function), handling the `dragstart`, `dragover`, `dragleave`, and `drop` events, and keeping the visual state in sync with the database on the server side.
+
+Fourth, since the native Drag and Drop API does not work reliably on touch devices, the application implements an **alternative navigation mechanism for mobile devices** — "◀" and "▶" buttons that let a user move a card between pipeline stages without dragging. This solution is driven by CSS media queries together with JavaScript logic that dynamically adds the appropriate buttons only when needed and updates their state (for example, disabling the "◀" button for the first column). This is a deliberate approach to the mobile-responsiveness requirement that goes beyond simply adjusting the CSS layout.
+
+Fifth, the application includes a full user account system with data isolation — every salesperson has their own independent pipeline, their own clients, and their own sales stages, which they can freely configure (add new stages, change their order). Every view and API endpoint filters data by the `owner` field, which required consistently securing every single query against unauthorized access to another user's data — this is a significant element of both the complexity and the security of the application.
+
+Finally, LeadFlow includes a statistics dashboard generated dynamically from aggregated database data (number of deals per stage, total pipeline value, number of overdue tasks), visualized with the Chart.js library. This required writing appropriate aggregation queries on the Django side (`Count`, `Sum` across relationships) as well as passing that data to the JavaScript layer in a format suitable for generating a chart.
+
+I believe that, taken together, these elements — a multi-model data architecture, a hand-built drag-and-drop mechanism synchronized asynchronously with the backend, an alternative mobile interface, per-user data isolation, and a dynamic statistics dashboard — collectively exceed the level of complexity and originality of any single prior project in this course, and clearly distinguish LeadFlow from both Project 2 (Commerce) and Project 4 (Network).
 
 ## ✅ Features Overview
 
-### 🔐 User Authentication
+This section summarizes the core features implemented in the application.
 
-  - Account creation, login, and logout.
-  - Profile management at /auth/my-account, including:
-    - Uploading a profile picture.
-    - Changing email and password.
+### 🔑 User Authentication
+- **Registration**: A new user creates an account, for which a default set of five pipeline stages is automatically generated.
+- **Login/Logout**: Standard Django session-based authentication.
+- Access to all CRM views requires the user to be logged in (`@login_required`).
 
-### 🎧 Audiobook Library
+### 📋 Sales Pipeline (Drag & Drop)
+- Cards representing deals are arranged in columns corresponding to sales stages.
+- Dragging a card between columns immediately updates its status in the database through an asynchronous request.
+- Clicking a card opens a modal where the title, description, value, priority, and due date can be edited.
+- Cards with an overdue due date are visually highlighted with a red border.
 
-  - Main library view at /auth/library:
-    - Displays all available audiobooks.
-    - Includes search and filter options.
-  - Detailed view per book at /auth/library/{book-id}:
-    - Playback interface.
-    - Metadata and descriptions.
+### 👥 Client Management
+- A client list with search functionality by first name, last name, company, or email.
+- A client detail page displays the full interaction history (calls, emails, meetings, notes) as well as all deals linked to that client.
 
-### ⭐ Favorites System
+### ✅ Tasks
+- A separate task/reminder list, independent from the pipeline, where tasks can be marked as done without reloading the page.
 
-  - Users can like/unlike books via /api/auth/like.
-  - Favorite books are stored in the user profile.
+### ⚙️ Pipeline Stage Configuration
+- Users can add new sales stages themselves and set the order in which they are displayed.
 
-### 🛠️ Audiobook Creation
+### 📊 Statistics Dashboard
+- A summary of the total number of deals, total pipeline value, number of closed deals, and number of overdue tasks.
+- An interactive bar chart showing the distribution of deals across pipeline stages (Chart.js).
 
-  - Accessible at /auth/create-book, with two options:
-  - Manual upload .mp3 files
-  - Enter text to generate audio using Camb.ai
+### 🛠️ Django Admin Interface
+- Administrators can manage all clients, deals, activities, and tasks through the built-in Django admin panel.
 
-### 🧪 Encrypted Storage with JWT
+## 📄 What's Contained in Each File
 
-  - Each note is stored as an encrypted JWT token.
-  - All sensitive data remains encrypted, including in the database.
-
-### 🔧 GraphQL API
-
-  - All operations (create, fetch, delete) go through a GraphQL API.
-  - Built on Cloudflare Workers using @apollo/server.
-
-### 🎨 Modern Frontend
-
-  - Responsive UI built with Tailwind CSS and Next.js.
-  - Follows modern design and UX principles.
-
-### 🛡️ Bot Protection & Authentication
-
-  - Cloudflare Turnstile is integrated into all forms.
-  - A one-time token is used as a Bearer token in the Authentication header for secure GraphQL queries.
-
-### 🚀 Performance & Deployment
-
-  - Hosted on Cloudflare Workers.
-  - Uses:
-    - Cloudflare D1 for database operations.
-    - Cloudflare R2 for efficient audio file storage.
-    - Next.js for optimal performance.
-
-## 🧩 Tech Stack & Dependencies
-
-To run the application, make sure you have the following dependencies installed:
-
-```json
-{
-  "next": "15.3.3",
-  "react": "^19.1.0",
-  "react-dom": "^19.1.0",
-  "react-lottie": "^1.2.10",
-  "@opennextjs/cloudflare": "^1.5.1",
-  "@as-integrations/cloudflare-workers": "^1.1.1",
-  "@apollo/client": "^3.13.8",
-  "@apollo/server": "^4.12.2",
-  "graphql": "^16.11.0"
-}
-```
-
-To install all dependencies, run:
-  ```sh
-  pnpm install
-  ```
+- **`crm/models.py`** — Model definitions: `Client`, `PipelineStage`, `Deal`, `Activity`, `Task`, and `Tag`, along with the relationships between them.
+- **`crm/views.py`** — View logic (pipeline, clients, tasks, dashboard, authentication) as well as the API endpoints that handle `fetch()` requests coming from JavaScript (moving, creating, editing, and deleting deals).
+- **`crm/forms.py`** — Django forms for clients, deals, tasks, pipeline stages, and activities, with querysets restricted to data belonging to the currently logged-in user.
+- **`crm/admin.py`** — Django admin panel configuration for all models.
+- **`crm/urls.py`** — URL routing, including a separate group of API endpoints under the `/api/` prefix.
+- **`crm/templates/crm/`** — HTML templates: a shared layout with navigation, login/registration forms, the main pipeline view, client list and detail pages, the task list, stage settings, and the dashboard.
+- **`crm/static/crm/css/styles.css`** — Application styling, including full responsiveness (media queries that switch the column-based pipeline view into a stacked mobile view with navigation buttons).
+- **`crm/static/crm/js/pipeline.js`** — Drag-and-drop logic, the deal-editing modal, communication with the API via `fetch()`, and the mobile card-moving mechanism.
+- **`crm/static/crm/js/dashboard.js`** — Initializes the Chart.js chart using data passed from the Django view.
+- **`crm/static/crm/js/filters.js`** — Dynamic, debounced client search that does not require reloading the page.
+- **`crm/static/crm/js/modal.js`** — Additional UX improvements for modals (resetting forms, preventing the edit modal from opening accidentally right after a drag-and-drop action).
+- **`crm_project/settings.py`** — Project configuration, including registration of the `crm` app, static file paths, and the SQLite database.
+- **`requirements.txt`** — List of Python dependencies required to run the project.
 
 ## 🚀 Running the Application
-### Create databases for Cloudflare D1
-Create local development databases for Cloudflare D1:
-  ```sh
-  pnpm db --local
-  ```
 
-Create production databases in the Cloudflare dashboard:
-  ```sh
-  pnpm db --remote
-  ```
+To run the application locally:
 
-### Running the Application in Development Mode
-To start the application in development mode, run the following commands:
-  ```sh
-  pnpm dev
-  ```
+### Install dependencies
 
-### Building and Previewing the Application
-To build the application in production mode, use:
-  ```sh
-  pnpm prod
-  ```
+```bash
+pip install -r requirements.txt
+```
 
-To preview the production build locally, run:
-  ```sh
-  pnpm preview
-  ```
+### Set up the database
 
-### Deploying to the Server
-To deploy the application, use the command:
-  ```sh
-  pnpm deploy
-  ```
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
 
-## 🕸️ GraphQL Operations
-Below are the core GraphQL operations used in the Enigma app to manage encrypted notes:
-  - Get book:
-    ```graphql
-    query GetBook($id: ID) {
-      books(id: $id) {
-        id
-        title
-        description
-        author
-        picture
-        file
-        date
-        ai
-      }
-    }
-    ```
+### Create an administrator account (optional)
 
-  - Get books:
-    ```graphql
-    query GetBooks{
-      books {
-        id
-        title
-        description
-        author
-        picture
-        file
-        date
-        ai
-      }
-    }
-    ```
+```bash
+python manage.py createsuperuser
+```
 
-  - Login user:
-    ```graphql
-    mutation LoginUser($credentials: LoginCredentials!) {
-      loginUser(credentials: $credentials) {
-        data
-      }
-    }
-    ```
+### Start the development server
 
-  - Register user:
-    ```graphql
-    mutation RegisterUser($credentials: RegisterInput!) {
-      registerUser(credentials: $credentials) {
-        data
-      }
-    }
-    ```
+```bash
+python manage.py runserver
+```
 
-  - Update user:
-    ```graphql
-    mutation UpdateUser($credentials: UpdateUserInput!) {
-      updateUser(credentials: $credentials) {
-        data
-      }
-    }
-    ```
+Then navigate to `http://127.0.0.1:8000`, register a new account (which will automatically create the default pipeline stages), and start using the application.
 
-  - Add like a book:
-    ```graphql
-    mutation LikeMutation($bookId: ID!, $userId: ID!) {
-      addLike(bookId: $bookId, userId: $userId) {
-        data
-      }
-    }
-    ```
+## 🧱 Static Assets
 
-  - Remove like a book:
-    ```graphql
-    mutation UnlikeMutation($bookId: ID!, $userId: ID!) {
-      removeLike(bookId: $bookId, userId: $userId) {
-        data
-      }
-    }
-    ```
+To collect static files before a production deployment:
 
-  - Create book:
-    ```graphql
-    mutation CreateBook($input: CreateBookInput!) {
-      createBook(input: $input) {
-        data
-      }
-    }
-    ```
+```bash
+python manage.py collectstatic
+```
+
+## 💡 Additional Information
+
+- **Data isolation**: Every API endpoint and view filters data by `owner=request.user`, so users cannot access or modify data belonging to other accounts.
+- **Error handling**: Forms validate user input, and API endpoints return appropriate HTTP status codes along with error messages in JSON format.
+- **Extensibility**: The model structure was designed to make it easy to add future features, such as CSV data export, email notifications for upcoming deadlines, or integration with external mail APIs.
+- **Mobile-first fallback**: Because the native Drag and Drop API is unreliable on touch devices, the application automatically switches to an alternative, button-based navigation interface on screens narrower than 768px.
+- No generative AI was used in the implementation of the application itself; it was used only to assist in writing this README, in accordance with the course's academic honesty policy.
 
 ## 🎥 Demo
 
-You can view a working version of the project here:
-👉 https://echoverse.wgwcompany.workers.dev/
-
-### Demo credentials:
-
-| Login | Password |
-|-------|----------|
-| John  | 12345    |
-
-Video walkthrough of the specification:
-🎥 https://youtu.be/-lCgQ6-MzIw
+Video walkthrough of the project and specifications:
+👉 [YOUTUBE LINK — TO BE ADDED]
 
 ## 📜 Certification
 
-This project was submitted as part of the CS50’s Web Programming with Python and JavaScript course offered by Harvard University.
-Upon successful completion, I was awarded a certificate, which is available here:
-
-🎓 [View Certificate](https://certificates.cs50.io/6f5116d0-882d-4fc1-9dc6-0c96c5d4c7b1.pdf)
+This project was submitted as part of CS50's Web Programming with Python and JavaScript, offered by Harvard University.
