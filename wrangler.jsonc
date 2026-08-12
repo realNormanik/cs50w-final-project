@@ -11,7 +11,7 @@
     "binding": "ASSETS"
   },
   "build": {
-    "command": "WORKERS_CI=1 python src/manage.py collectstatic --noinput"
+    "command": "WORKERS_CI=1 uv run python src/manage.py collectstatic --noinput"
   },
   "python_modules": {
     "exclude": [
